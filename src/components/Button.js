@@ -18,9 +18,3 @@ export default function Button(props) {
     </button>
   )
 }
-
-{/*
-<Button danger>Cancel</Button>
-<button className="button button--confirm">Confirm</button>
-
-*/} 
