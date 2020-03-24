@@ -23,11 +23,9 @@ export function getInterview (state, interview) {
     return null;
   }
   else{
-    console.log('getInterview', state)
-    console.log('interview', interview)
-    const interviewerId = interview.interviewer
+    const interviewerId = interview.interviewer;
     const interviewerObj = 
-      state.interviewers[interviewerId]
+      state.interviewers[interviewerId];
     return { 
       student: interview.student, 
       interviewer: interviewerObj
@@ -45,5 +43,3 @@ export function getInterview (state, interview) {
     "avatar": "https://i.imgur.com/LpaY82x.png"
   }
 } */
-
-// export default { getAppointmentsForDay, getInterview };
