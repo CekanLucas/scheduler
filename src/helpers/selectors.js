@@ -9,7 +9,6 @@ export function getAppointmentsForDay(state, day) {
 
   //validation for if day has no appointments 
   if(!appointmentArr){
-    console.log("empty arr");
     return [];
   }
 
@@ -17,4 +16,34 @@ export function getAppointmentsForDay(state, day) {
     if( appointments[`${id}`] )
       return appointments[`${id}`]
   });
+};
+
+export function getInterview (state, interview) {
+  if( interview === null ){
+    return null;
+  }
+  else{
+    console.log('getInterview', state)
+    console.log('interview', interview)
+    const interviewerId = interview.interviewer
+    const interviewerObj = 
+      state.interviewers[interviewerId]
+    return { 
+      student: interview.student, 
+      interviewer: interviewerObj
+    }
+  }
 }
+
+/* The function should return a new object containing the interview data when we pass it an object that contains the interviewer. Otherwise, the function should return null. The object it returns should look like this:
+
+{  
+  "student": "Lydia Miller-Jones",
+  "interviewer": {  
+    "id": 1,
+    "name": "Sylvia Palmer",
+    "avatar": "https://i.imgur.com/LpaY82x.png"
+  }
+} */
+
+// export default { getAppointmentsForDay, getInterview };

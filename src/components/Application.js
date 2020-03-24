@@ -4,61 +4,50 @@ import axios from "axios";
 import DayList from "./DayList";
 import Appointment from "components/Appointment/index";
 import "components/Application.scss";
-
-const appointments = [
-  {
-    id: 1,
-    time: "12pm"
-  },
-  {
-    id: 2,
-    time: "1pm",
-    interview: {
-      student: "Lydia Miller-Jones",
-      interviewer: {
-        id: 1,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png"
-      }
-    }
-  },
-  {
-    id: 2,
-    time: "2pm"
-  },
-  {
-    id: 3,
-    time: "3pm",
-    interview: {
-      student: "That guy",
-      interviewer: {
-        id: 2,
-        name: "Tori Malcolm",
-        avatar: "https://i.imgur.com/Nmx0Qxo.png"
-      }
-    }
-  }
-];
+import getAppointmentsForDay from "helpers/selectors";
 
 export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewers: {}
   });
   const setDay = day => setState({ ...state, day });
+  const appointments = getAppointmentsForDay(state, state.day);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8001/api/days")
-      .then(request => {
-        setState(prev => ({ ...prev, days: request.data }));
-        return;
-      })
-      .catch(e => console.log("there was a error"));
+    Promise.all([
+      Promise.resolve(
+        axios
+          .get("http://localhost:8001/api/days")
+          .then(request => {
+            return request.data;
+          })
+      ),
+      Promise.resolve(
+        axios
+          .get("http://localhost:8001/api/appointments")
+          .then(request => {
+            return request.data;
+          })
+      ),
+      Promise.resolve(
+        axios
+          .get("http://localhost:8001/api/interviewers")
+          .then(request => {
+            return request.data;
+          })
+      )
+    ]).then( (all) => {
+      console.log(all[0],all[1], all[2]);
+      setState(prev => ({ ...prev, days: all[0], appointments:all[1], interviewers: all[2] }));
+    }).catch(e => console.log("there was a error"));
   }, []);
 
   const appointmentList = appointments.map(appointment => {
+    // transform interview here
+    
     return <Appointment key={appointment.id} {...appointment} />;
   });
   return (
