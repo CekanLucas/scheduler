@@ -8,7 +8,7 @@ import Empty from "components/Appointment/Empty";
 
 export default function Appointment(props){
   return (
-    <article className="appointment" key={props.key}>
+    <article className="appointment" >
       <Header time={props.time} />
       { props.interview ? 
         <Show 
