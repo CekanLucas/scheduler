@@ -32,3 +32,22 @@ export function getInterview (state, interview) {
     }
   }
 }
+
+export function getInterviewersForDay(state, day) {
+  const days = state.days;
+  let interviewers = state.interviewers;
+  
+  const dayObj = days.filter( (dayObj) => {
+    return day === dayObj.name ? true : false;
+  })[0]; // extract relevant dayObj from days
+
+  //validation for if day has no interviewers 
+  if(!dayObj || dayObj.interviewers.length === 0){
+    return [];
+  }
+
+  return  dayObj.interviewers.map( id => {
+    if( interviewers[`${id}`] )
+      return interviewers[`${id}`]
+  });
+};
