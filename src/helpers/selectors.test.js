@@ -1,7 +1,4 @@
-// import getAppointmentsForDay from "./selectors";
-// import getInterview from "./selectors";
 import { getAppointmentsForDay, getInterview } from "./selectors";
-
 
 const state = {
   days: [
