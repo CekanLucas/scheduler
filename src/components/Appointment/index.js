@@ -1,6 +1,6 @@
 import "components/Appointment/styles.scss";
 
-import React, { Fragment } from "react";
+import React from "react";
 
 import Header from "components/Appointment/Header";
 import Show from "components/Appointment/Show";
@@ -15,6 +15,7 @@ export default function Appointment(props){
   const SHOW = "SHOW";
   const CREATE = "CREATE";
   const SAVING = "SAVING";
+  const DELETING = "DELETING";
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -29,11 +30,18 @@ export default function Appointment(props){
     };
     transition('SAVING')
     props.bookInterview(props.id, interview)
-      .then( resolve => {
+      .then( () => {
+        transition(SHOW)})
+  }
 
-        console.log('resolve',resolve)
-        const interview = {...resolve}
-        transition('SHOW')})
+  function cancel(name) {
+    const interview = {
+      student: name, interviewer:null
+    };
+    transition(DELETING)
+    props.cancelInterview(props.id, interview)
+      .then( () => {
+        transition(EMPTY)})
   }
 
   return (
@@ -52,12 +60,16 @@ export default function Appointment(props){
         />
       )}
       {mode === SAVING && (
-        <Status message={'SAVING'}/>
+        <Status message={SAVING}/>
+      )}
+      {mode === DELETING && (
+        <Status message={DELETING}/>
       )}
       {mode === SHOW && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
+          onDelete={cancel}
         />
       )}
     </article>
