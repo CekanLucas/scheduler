@@ -45,6 +45,28 @@ export default function Application(props) {
     }).catch(e => console.log("there was a error"));
   }, []);
 
+  const bookInterview = (id, interview) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };  
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    setState({
+      ...state,
+      appointments
+    });
+
+    return axios
+      .put(`http://localhost:8001/api/appointments/${id}`, appointment)
+      .then( res => {
+        setState({...state});
+      })
+      .catch(error => console.log(error))
+  }
+
   const appointmentList = appointments.map(appointment => {
     const interviewer = getInterview(state, appointment.interview);
     return (
@@ -53,9 +75,11 @@ export default function Application(props) {
       {...appointment} 
       interview={interviewer}
       interviewers={state.interviewers}
+      bookInterview={bookInterview}
     />
     );
   });
+
   return (
     <main className="layout">
       <section className="sidebar">
