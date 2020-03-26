@@ -89,7 +89,6 @@ export default function Application(props) {
         return;
       })
       .catch(error => console.log(error))
-      
   } 
 
   const appointmentList = appointments.map(appointment => {
