@@ -59,7 +59,7 @@ export default function Application(props) {
       ...state,
       appointments
     });
-    // const appointments.filter( ()=>)
+    
     const interviewer = getInterview(state, interview);
     console.log('Interview', interviewer)
 

@@ -20,6 +20,9 @@ export default function Appointment(props){
   );
 
   function save(name, interviewer) {
+    if(!name || !interviewer) //validation
+      return;
+
     const interview = {
       student: name,
       interviewer
