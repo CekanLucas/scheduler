@@ -52,6 +52,7 @@ export default function Application(props) {
       key={appointment.id} 
       {...appointment} 
       interview={interviewer}
+      interviewers={state.interviewers}
     />
     );
   });
