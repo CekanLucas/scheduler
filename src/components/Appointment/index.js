@@ -26,7 +26,11 @@ export default function Appointment(props){
     };
     transition('SAVING')
     props.bookInterview(props.id, interview)
-      .then(() => transition('SHOW'))
+      .then( resolve => {
+
+        console.log('resolve',resolve)
+        const interview = {...resolve}
+        transition('SHOW')})
   }
 
   return (
@@ -36,23 +40,21 @@ export default function Appointment(props){
       <Empty 
         onAdd={() => transition(CREATE)} 
       />}
-      {mode === SAVING && (
-        <Status
-          message={'SAVING'}
-        />
-      )}
-      {mode === SHOW && (
-        <Show
-          student={props.interview.student}
-          interviewer={props.interview.interviewer}
-        />
-      )}
       {mode === CREATE && (
         <Form
           name={props.name}
           interviewers={props.interviewers}
           onSave={save}
           onCancel={() => back()}
+        />
+      )}
+      {mode === SAVING && (
+        <Status message={'SAVING'}/>
+      )}
+      {mode === SHOW && (
+        <Show
+          student={props.interview.student}
+          interviewer={props.interview.interviewer}
         />
       )}
     </article>

@@ -46,6 +46,7 @@ export default function Application(props) {
   }, []);
 
   const bookInterview = (id, interview) => {
+    // id is appointment id 
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -58,11 +59,14 @@ export default function Application(props) {
       ...state,
       appointments
     });
+    // const appointments.filter( ()=>)
+    const interviewer = getInterview(state, interview);
+    console.log('Interview', interviewer)
 
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, appointment)
       .then( res => {
-        setState({...state});
+        return interviewer;
       })
       .catch(error => console.log(error))
   }
