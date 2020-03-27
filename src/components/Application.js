@@ -55,22 +55,26 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    setState({
-      ...state,
-      appointments
-    });
 
     const interviewer = getInterview(state, interview);
 
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, appointment)
       .then( () => {
+        setState({
+          ...state,
+          appointments
+        });
         return interviewer;
       })
-      .catch(error => console.log(error))
+      .catch( () => {
+        console.log('ERROR')
+        return 'error'
+      })
   }
 
   const cancelInterview = (appointmentId) => {
+    const prev = {  ...state }
     const appointment = {
       ...state.appointments[appointmentId], interview: null
     };  
@@ -78,17 +82,23 @@ export default function Application(props) {
       ...state.appointments,
       [appointmentId]: appointment
     };
-    setState({
-      ...state,
-      appointments
-    });
+
 
     return axios
       .delete(`http://localhost:8001/api/appointments/${appointmentId}`)
       .then( () => {
+        setState({
+          ...state,
+          appointments
+        });
         return;
       })
-      .catch(error => console.log(error))
+      .catch( () => {
+        console.log('ERROR')
+        console.log('prev',prev)
+        setState({...prev})
+        return {error:'error', prev}
+      })
   } 
 
   const appointmentList = appointments.map(appointment => {
