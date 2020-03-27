@@ -58,8 +58,16 @@ export default function useApplicationData() {
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, appointment)
       .then( () => {
+        const modifiedDays = [...state.days].map( (day) => {
+          if(day.name === state.day) {
+            console.log('SUCESS')
+            day.spots -= 1;
+            return day;
+          } else {return day}
+        }) 
         setState({
           ...state,
+          days:[...modifiedDays],
           appointments
         });
         return interviewer;
@@ -83,10 +91,19 @@ export default function useApplicationData() {
     return axios
       .delete(`http://localhost:8001/api/appointments/${appointmentId}`)
       .then( () => {
+        const modifiedDays = [...state.days].map( (day) => {
+          if(day.name === state.day) {
+            console.log('SUCESS')
+            day.spots += 1;
+            return day;
+          } else {return day}
+        }) 
         setState({
           ...state,
+          days:[...modifiedDays],
           appointments
         });
+        console.log("DAYS after ",state.days)
         return;
       })
       .catch( () => {

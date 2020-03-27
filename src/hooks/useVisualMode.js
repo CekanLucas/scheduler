@@ -16,6 +16,6 @@ export const useVisualMode = (initial) => {
       setMode(history[history.length -1]);
     }
   }
-  console.log('history',history)
+  // console.log('history',history)
   return {mode, transition, back}
 } 
