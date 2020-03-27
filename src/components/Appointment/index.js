@@ -53,7 +53,7 @@ export default function Appointment(props){
     props.cancelInterview(props.id, interview)
       .then( res => {
         console.log(res)
-        if (res.error){
+        if (res){
           console.log("cancel error")
           transition(ERROR, true)
           return;
