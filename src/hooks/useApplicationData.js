@@ -60,7 +60,6 @@ export default function useApplicationData() {
       .then( () => {
         const modifiedDays = [...state.days].map( (day) => {
           if(day.name === state.day) {
-            console.log('SUCESS')
             day.spots -= 1;
             return day;
           } else {return day}
