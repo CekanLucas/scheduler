@@ -109,7 +109,7 @@ export default function Appointment(props){
       {mode === ERROR && (
         <Error
           message={"There was Error!"}
-          onClose={()=>transition(SHOW, true)}
+          onClose={()=>props.interviewer? transition(SHOW, true) : back()}
         />
       )}
     </article>
