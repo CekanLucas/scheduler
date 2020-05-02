@@ -18,10 +18,10 @@ const reducer = (state, action) => {
       return { ...state, day: action.day }
     case SET_APPLICATION_DATA:
       return {  
-        ...prev,
-        days: all[0], 
-        appointments:all[1], 
-        interviewers: all[2] 
+        ...state,
+        days: action.all[0], 
+        appointments: action.all[1], 
+        interviewers: action.all[2] 
       }
     case SET_INTERVIEW: {
       return {
@@ -72,7 +72,7 @@ export default function useApplicationData() {
       )
     ]).then( (all) => {
       // console.log(all[0],all[1], all[2]);
-      dispatch(prev => (SET_APPLICATION_DATA));
+      dispatch({type:SET_APPLICATION_DATA, all:all});
     }).catch(e => console.log("there was a error"));
   }, []);
 
