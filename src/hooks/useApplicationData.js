@@ -26,8 +26,8 @@ const reducer = (state, action) => {
     case SET_INTERVIEW: {
       return {
         ...state,
-        days:[...modifiedDays],
-        appointments
+        days:[...action.modifiedDays],
+        appointments: action.appointments
       }
     }
     default:
@@ -45,7 +45,7 @@ export default function useApplicationData() {
     interviewers: {}
   });
 
-  const setDay = day => dispatch({ type:SET_DAY, day:day });
+  const setDay = day => dispatch({ type:SET_DAY, day });
   
   useEffect(() => {
     Promise.all([
@@ -98,7 +98,7 @@ export default function useApplicationData() {
             return day;
           } else {return day}
         }) 
-        dispatch({ SET_INTERVIEW});
+        dispatch({ type:SET_INTERVIEW, modifiedDays, appointments});
         return interviewer;
       })
       .catch( () => {
@@ -127,14 +127,11 @@ export default function useApplicationData() {
             return day;
           } else {return day}
         }) 
-        dispatch({ SET_INTERVIEW});
+        dispatch({ type:SET_INTERVIEW, modifiedDays, appointments});
         console.log("DAYS after ",state.days)
         return;
       })
       .catch( () => {
-        console.log('ERROR')
-        console.log('prev',prev)
-        // setState({...prev})
         return {error:'error', prev}
       })
   } 
