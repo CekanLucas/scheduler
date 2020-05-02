@@ -1,17 +1,51 @@
-import { useState, useEffect } from "react";
+import { useReducer, useEffect } from "react";
 import {getInterview} from "helpers/selectors";
 import "components/Application.scss";
 import axios from "axios";
 
+// define actions
+const SET_DAY = "SET_DAY";
+const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
+const SET_INTERVIEW = "SET_INTERVIEW";
+
+const reducers = {
+}
+
+const reducer = (state, action) => {
+  console.log(action)
+  switch (action.type) {
+    case SET_DAY:
+      return { ...state, day: action.day }
+    case SET_APPLICATION_DATA:
+      return {  
+        ...prev,
+        days: all[0], 
+        appointments:all[1], 
+        interviewers: all[2] 
+      }
+    case SET_INTERVIEW: {
+      return {
+        ...state,
+        days:[...modifiedDays],
+        appointments
+      }
+    }
+    default:
+      throw new Error(
+        `Tried to reduce with unsupported action type: ${action.type}`
+      );
+  }
+}
+
 export default function useApplicationData() {
-  const [state, setState] = useState({
+  const [state, dispatch] = useReducer(reducer, {
     day: "Monday",
     days: [],
     appointments: {},
     interviewers: {}
   });
 
-  const setDay = day => setState({ ...state, day });
+  const setDay = day => dispatch({ type:SET_DAY, day:day });
   
   useEffect(() => {
     Promise.all([
@@ -38,7 +72,7 @@ export default function useApplicationData() {
       )
     ]).then( (all) => {
       // console.log(all[0],all[1], all[2]);
-      setState(prev => ({ ...prev, days: all[0], appointments:all[1], interviewers: all[2] }));
+      dispatch(prev => (SET_APPLICATION_DATA));
     }).catch(e => console.log("there was a error"));
   }, []);
 
@@ -64,11 +98,7 @@ export default function useApplicationData() {
             return day;
           } else {return day}
         }) 
-        setState({
-          ...state,
-          days:[...modifiedDays],
-          appointments
-        });
+        dispatch({ SET_INTERVIEW});
         return interviewer;
       })
       .catch( () => {
@@ -97,18 +127,14 @@ export default function useApplicationData() {
             return day;
           } else {return day}
         }) 
-        setState({
-          ...state,
-          days:[...modifiedDays],
-          appointments
-        });
+        dispatch({ SET_INTERVIEW});
         console.log("DAYS after ",state.days)
         return;
       })
       .catch( () => {
         console.log('ERROR')
         console.log('prev',prev)
-        setState({...prev})
+        // setState({...prev})
         return {error:'error', prev}
       })
   } 
