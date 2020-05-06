@@ -9,16 +9,24 @@ onChange:function - a function that accepts an interviewer id
 import React from "react";
 import InterviewerListItem from "./InterviewerListItem";
 import "components/InterviewerList.scss";
+import PropTypes from "prop-types";
+
+  // validate type with prop-type library
+  InterviewerList.propTypes = {
+    value: PropTypes.number,
+    onChange: PropTypes.func.isRequired
+  };
+  
 
 export default function InterviewerList(props) {
-  const InterviewerList = Object.values(props.interviewers).map( (interviewer, i) => {
+  const InterviewerList = Object.values(props.interviewers).map( (interviewer) => {
     return (
       <InterviewerListItem
         key={interviewer.id}
         name={interviewer.name} 
         avatar={interviewer.avatar} 
         selected={interviewer.id === props.value} 
-        setInterviewer={ e => props.onChange(interviewer.id)} />
+        setInterviewer={ () => props.onChange(interviewer.id)} />
     );
   })
 
