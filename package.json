@@ -10,7 +10,7 @@
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.0.0",
+    "react-scripts": "5.0.1",
     "storybook": "^5.3.17"
   },
   "scripts": {
@@ -40,7 +40,7 @@
     "@storybook/addon-backgrounds": "^5.3.17",
     "@storybook/addon-links": "^5.3.17",
     "@storybook/addons": "^5.3.17",
-    "@storybook/react": "^5.3.17",
+    "@storybook/react": "^6.5.13",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^8.0.9",
     "@testing-library/react-hooks": "^3.2.1",
