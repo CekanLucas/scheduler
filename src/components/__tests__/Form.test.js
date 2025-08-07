@@ -5,7 +5,6 @@ import Form from "components/Appointment/Form";
 afterEach(cleanup);
 
 describe("Form", () => {
-  const { getByPlaceholderText } = render(<Form />); 
   const interviewers = [
     {
       id: 1,
@@ -13,6 +12,12 @@ describe("Form", () => {
       avatar: "https://i.imgur.com/LpaY82x.png"
     }
   ];
+  const { getByPlaceholderText } = render(<Form/>); 
+  const { getByTestId } = render(
+    <Form interviewers={interviewers} name="Lydia Miller-Jones" />
+  );
+  
+  
 
   it("renders without student name if not provided", () => {
     expect(getByPlaceholderText("Enter Student Name")).toHaveValue("");

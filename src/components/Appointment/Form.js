@@ -25,6 +25,9 @@ import Button from "components/Button";
 
 export default function Form(props){
 
+  console.log("TEST ", props)
+  console.log("TEST ", props)
+
   // two states defined in Form
   const [name, setName] = useState(props.name || '');
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
