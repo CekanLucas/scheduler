@@ -23,9 +23,8 @@ import React, { useState } from "react";
 import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
 
-export default function Form(props){
+export default function Form(props) {
 
-  console.log("TEST ", props)
   console.log("TEST ", props)
 
   // two states defined in Form
@@ -34,12 +33,12 @@ export default function Form(props){
   const reset = () => {
     setName('');
     setInterviewer(null);
-  } 
+  }
   const cancel = () => {
     reset();
     props.onCancel();
   }
-  
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -48,15 +47,15 @@ export default function Form(props){
             className="appointment__create-input text--semi-bold"
             name="name"
             type="text"
-            placeholder="Enter Student Name"
-            value={name ? name : ''}
+            placeholder={name ? name : "Enter Student Name"}
+            value={name}
             onChange={e => setName(e.target.value)}
             data-testid="student-name-input"
           />
         </form>
-        <InterviewerList 
-          interviewers={props.interviewers} 
-          value={interviewer} 
+        <InterviewerList
+          interviewers={props.interviewers}
+          value={interviewer}
           onChange={setInterviewer}
         />
       </section>

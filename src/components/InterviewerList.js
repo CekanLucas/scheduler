@@ -20,6 +20,10 @@ import PropTypes from "prop-types";
 
 export default function InterviewerList(props) {
   console.log("TEST ", props.interviewers)
+  if(!props.interviewers) {
+    console.log("No interviewers present");
+    return '';
+  }
   const InterviewerList = Object.values(props.interviewers).map( (interviewer) => {
     return (
       <InterviewerListItem

@@ -11,15 +11,16 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^5.0.1",
-    "sass": "^1.90.0",
-    "storybook": "^5.3.17"
+    "sass": "^1.90.0"
   },
   "scripts": {
     "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+
+    "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s public --ci",
+    "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
   "browserslist": {
@@ -37,11 +38,15 @@
   "devDependencies": {
     "@babel/core": "^7.8.7",
     "@babel/preset-react": "^7.9.1",
-    "@storybook/addon-actions": "^5.3.17",
-    "@storybook/addon-backgrounds": "^5.3.17",
-    "@storybook/addon-links": "^5.3.17",
-    "@storybook/addons": "^5.3.17",
-    "@storybook/react": "^5.3.17",
+    "@storybook/addon-actions": "~6.5.16",
+    "@storybook/addon-backgrounds": "~6.5.16",
+    "@storybook/addon-essentials": "~6.5.16",
+    "@storybook/addon-links": "~6.5.16",
+    "@storybook/addons": "~6.5.16",
+    "@storybook/builder-webpack5": "~6.5.16",
+    "@storybook/manager-webpack5": "~6.5.16",
+    "@storybook/preset-create-react-app": "^4.1.2",
+    "@storybook/react": "~6.5.16",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^8.0.9",
     "@testing-library/react-hooks": "^3.2.1",

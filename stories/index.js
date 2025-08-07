@@ -20,9 +20,6 @@ import Error from "components/Appointment/Error";
 import Form from "components/Appointment/Form";
 
 storiesOf("Button", module)
-  .addParameters({
-    backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-  })
   .add("Base", () => <Button>Base</Button>)
   .add("Confirm", () => <Button confirm>Confirm</Button>)
   .add("Danger", () => <Button danger>Cancel</Button>)
@@ -36,9 +33,6 @@ storiesOf("Button", module)
   ));
 
 storiesOf("DayListItem", module) //Initiates Storybook and registers our DayListItem component
-  .addParameters({
-    backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-  }) // Provides the default background color for our component
   .add("Unselected", () => <DayListItem name="Monday" spots={5} />) // To define our stories, we call add() once for each of our test states to generate a story
   .add("Selected", () => <DayListItem name="Monday" spots={5} selected />) 
   .add("Full", () => <DayListItem name="Monday" spots={0} />)
@@ -65,9 +59,6 @@ storiesOf("DayListItem", module) //Initiates Storybook and registers our DayList
 ];
 
 storiesOf("DayList", module)
-  .addParameters({
-    backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
-  })
   .add("Monday", () => (
     <DayList days={days} day={"Monday"} setDay={action("setDay")} />
   ))
@@ -82,9 +73,6 @@ const interviewer = {
 };
 
 storiesOf("InterviewerListItem", module)
-  .addParameters({
-    backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-  })
   .add("Unselected", () => (
     <InterviewerListItem
       id={interviewer.id}
@@ -118,9 +106,6 @@ storiesOf("InterviewerListItem", module)
 ];
 
 storiesOf("InterviewerList", module)
-  .addParameters({
-    backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-  })
   .add("Initial", () => (
     <InterviewerList
       interviewers={interviewers}
@@ -136,9 +121,6 @@ storiesOf("InterviewerList", module)
   ));
 
 storiesOf("Appointment", module)
-  .addParameters({
-    backgrounds: [{ name: "white", value: "#fff", default: true }]
-  })
   .add("Appointment", () => <Appointment />)
   .add("Appointment with Time", () => (
     <Appointment 
